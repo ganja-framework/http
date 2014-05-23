@@ -69,4 +69,13 @@ class RequestSpec extends Specification {
         request.getScheme() == 'http'
         request.getHost() == 'localhost'
     }
+
+    void "it can read from ServletRequest"() {
+
+        given:
+        def request = new Request()
+
+        expect:
+        request.metaClass.respondsTo(request, 'readFrom')
+    }
 }

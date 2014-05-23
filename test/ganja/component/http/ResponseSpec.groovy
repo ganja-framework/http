@@ -12,4 +12,25 @@ class ResponseSpec extends Specification {
         expect:
         response instanceof Response
     }
+
+    void "it has a content"() {
+
+        given:
+        def response = new Response()
+
+        when:
+        response.setContent('Hello World!')
+
+        then:
+        response.content == 'Hello World!'
+    }
+
+    void "it can write to ServletResponse"() {
+
+        given:
+        def response = new Response()
+
+        expect:
+        response.metaClass.respondsTo(response, 'writeTo')
+    }
 }

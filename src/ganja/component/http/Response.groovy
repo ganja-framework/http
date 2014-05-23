@@ -1,5 +1,8 @@
 package ganja.component.http
 
-class Response {
+import ganja.component.http.common.ServletResponseWriterTrait
 
+class Response implements ServletResponseWriterTrait {
+
+    String content
 }

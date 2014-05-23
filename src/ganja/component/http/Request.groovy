@@ -2,8 +2,9 @@ package ganja.component.http
 
 import ganja.component.http.common.AttributeTrait
 import ganja.component.http.common.ParameterTrait
+import ganja.component.http.common.ServletRequestReaderTrait
 
-class Request implements AttributeTrait, ParameterTrait {
+class Request implements AttributeTrait, ParameterTrait, ServletRequestReaderTrait {
 
     String method
     Integer port
