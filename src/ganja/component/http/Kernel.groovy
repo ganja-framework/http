@@ -1,7 +1,10 @@
 package ganja.component.http
 
+import ganja.component.event.DispatcherInterface
 import ganja.component.event.EventInterface
+import ganja.component.http.controller.ControllerResolverInterface
 import ganja.component.http.event.KernelControllerEvent
+import ganja.component.http.event.KernelEvents
 import ganja.component.http.event.KernelExceptionEvent
 import ganja.component.http.event.KernelRequestEvent
 import ganja.component.http.event.KernelResponseEvent
@@ -10,6 +13,9 @@ import ganja.component.http.exception.ControllerNotFoundException
 import java.util.concurrent.Callable
 
 class Kernel implements KernelInterface {
+
+    DispatcherInterface dispatcher
+    ControllerResolverInterface resolver
 
     @Override
     Response handle(Request request, Boolean catchException) {
