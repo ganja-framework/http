@@ -31,11 +31,19 @@ version = "0.1.${System.env.BUILD_NUMBER}"
 
 repositories {
     mavenCentral()
+    maven {
+        url "http://jenkins.nixilla.net/nexus/content/repositories/ganja-releases/"
+        credentials {
+            username sonatypeUsername
+            password sonatypePassword
+        }
+    }
 }
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.2.2'
-    testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
+    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+    compile 'ganja.component:event:0.1.8'
 }
 
 cobertura {
