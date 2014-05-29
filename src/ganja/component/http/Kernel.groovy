@@ -44,7 +44,6 @@ class Kernel implements KernelInterface {
         dispatcher.dispatch(KernelEvents.REQUEST, event)
 
         if(event.getResponse()) {
-            logger.debug("Got response from ${KernelEvents.REQUEST} listener")
             return filter(event.getResponse(), request)
         }
 
