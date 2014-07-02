@@ -1,6 +1,6 @@
 package ganja.component.http.common
 
-trait ServletRequestReaderTrait {
+trait ServletRequestParserTrait {
 
     void readFrom(def servletRequest) {
 
@@ -12,5 +12,11 @@ trait ServletRequestReaderTrait {
         scheme = servletRequest.getScheme()
         method = servletRequest.getMethod()
         host = servletRequest.getRequestURL().toString().toURL().getHost()
+
+        servletRequest.getParameterMap().each {
+            if(it.value) {
+                setParameter(it.key, (it.value.size() == 1) ? it.value.first() : it.value)
+            }
+        }
     }
 }

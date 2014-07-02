@@ -37,10 +37,14 @@ repositories {
 }
 
 dependencies {
+
     compile 'org.codehaus.groovy:groovy-all:2.3.3'
+    compile 'ganja.component:event:0.1.9'
+
+//    testCompile "javax.servlet:servlet-api:2.5"
+
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
     testCompile 'cglib:cglib-nodep:2.2.2'
-    compile 'ganja.component:event:0.1.9'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {

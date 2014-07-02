@@ -1,5 +1,6 @@
 package ganja.component.http
 
+import ganja.component.http.common.ServletRequestParserTrait
 import spock.lang.Specification
 
 class RequestSpec extends Specification {
@@ -77,5 +78,25 @@ class RequestSpec extends Specification {
 
         expect:
         request.metaClass.respondsTo(request, 'readFrom')
+        request instanceof ServletRequestParserTrait
+        request instanceof Request
+    }
+
+    void "it can parse servletRequest parameter map"() {
+
+        given:
+        def request = new Request()
+
+        when:
+        Object servletRequest = GroovyMock() { getParameterMap() >> input; getRequestURL() >> 'http://example.com' }
+        request.readFrom(servletRequest)
+
+        then:
+        request.getParameters() == expected
+
+        where:
+        expected                | input
+        [a: 'b', c: ['a', 'b']] | [a: ['b'], c: ['a', 'b']]
+
     }
 }
