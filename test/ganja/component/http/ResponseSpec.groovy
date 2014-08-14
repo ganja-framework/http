@@ -13,16 +13,25 @@ class ResponseSpec extends Specification {
         response instanceof Response
     }
 
-    void "it has a content"() {
+    void "it has some properties"() {
 
         given:
         def response = new Response()
 
-        when:
-        response.setContent('Hello World!')
+        expect: 'Default values'
+        response.getStatusCode() == 200
+        response.content == null
+        response.getContentType() == null
 
-        then:
+        when: 'Set values'
+        response.setContent('Hello World!')
+        response.setContentType('text/html')
+        response.setStatusCode(201)
+
+        then: 'Verify values'
         response.content == 'Hello World!'
+        response.getContentType() == 'text/html'
+        response.getStatusCode() == 201
     }
 
     void "it can write to ServletResponse"() {
