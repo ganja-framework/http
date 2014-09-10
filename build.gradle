@@ -44,6 +44,16 @@ dependencies {
     testCompile 'cglib:cglib-nodep:2.2.2'
 }
 
+if (!hasProperty('sonatypeUsername')) {
+    ext.sonatypeUsername = ''
+}
+if (!hasProperty('sonatypePassword')) {
+    ext.sonatypePassword = ''
+}
+if (!hasProperty('sonatypeUrl')) {
+    ext.sonatypeUrl = ''
+}
+
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.groovy
