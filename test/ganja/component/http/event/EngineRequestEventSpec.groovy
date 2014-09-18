@@ -5,15 +5,15 @@ import ganja.component.http.Request
 import ganja.component.http.Response
 import spock.lang.Specification
 
-class KernelResponseEventSpec extends Specification {
+class EngineRequestEventSpec extends Specification {
 
     void "it can be initialized"() {
 
         given:
-        def event = new KernelResponseEvent()
+        def event = new EngineRequestEvent()
 
         expect:
-        event instanceof KernelResponseEvent
+        event instanceof EngineRequestEvent
         event instanceof Event
     }
 
@@ -21,7 +21,7 @@ class KernelResponseEventSpec extends Specification {
 
         given:
         def request = Mock(Request)
-        def event = new KernelResponseEvent(request: request)
+        def event = new EngineRequestEvent(request: request)
 
         expect:
         event.request == request
@@ -31,7 +31,7 @@ class KernelResponseEventSpec extends Specification {
 
         given:
         def response = Mock(Response)
-        def event = new KernelResponseEvent(response: response)
+        def event = new EngineRequestEvent(response: response)
 
         expect:
         event.response == response

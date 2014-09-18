@@ -2,11 +2,11 @@ package ganja.component.http.event
 
 import ganja.component.event.Event
 import ganja.component.http.Request
+import ganja.component.http.Response
 
-import java.util.concurrent.Callable
-
-class KernelControllerEvent extends Event {
+class EngineExceptionEvent extends Event {
 
     Request request
-    Callable controller
+    Response response
+    Exception exception
 }

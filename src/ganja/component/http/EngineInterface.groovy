@@ -1,6 +1,6 @@
 package ganja.component.http
 
-public interface KernelInterface {
+public interface EngineInterface {
 
     Response handle(Request request, Boolean catchException)
 }

@@ -2,14 +2,14 @@ package ganja.component.http
 
 import spock.lang.Specification
 
-class KernelSpec extends Specification {
+class EngineSpec extends Specification {
 
     void "it can be initialized"() {
 
         given:
-        def kernel = new Kernel()
+        def engine = new Engine()
 
         expect:
-        kernel instanceof Kernel
+        engine instanceof Engine
     }
 }

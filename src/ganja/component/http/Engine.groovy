@@ -2,20 +2,16 @@ package ganja.component.http
 
 import ganja.component.event.DispatcherInterface
 import ganja.component.event.EventInterface
-import ganja.component.http.controller.ControllerResolverInterface
-import ganja.component.http.event.KernelControllerEvent
-import ganja.component.http.event.KernelEvents
-import ganja.component.http.event.KernelExceptionEvent
-import ganja.component.http.event.KernelRequestEvent
-import ganja.component.http.event.KernelResponseEvent
+import ganja.component.http.event.EngineControllerEvent
+import ganja.component.http.event.EngineEvents
+import ganja.component.http.event.EngineExceptionEvent
+import ganja.component.http.event.EngineRequestEvent
+import ganja.component.http.event.EngineResponseEvent
 import ganja.component.http.exception.ControllerNotFoundException
 
-import java.util.concurrent.Callable
-
-class Kernel implements KernelInterface {
+class Engine implements EngineInterface {
 
     DispatcherInterface dispatcher
-    ControllerResolverInterface resolver
 
     @Override
     Response handle(Request request, Boolean catchException) {
@@ -39,31 +35,25 @@ class Kernel implements KernelInterface {
 
     Response doHandle(Request request) {
 
-        EventInterface event = new KernelRequestEvent(dispatcher: dispatcher, request: request)
+        EventInterface event = new EngineRequestEvent(dispatcher: dispatcher, request: request)
 
-        dispatcher.dispatch(KernelEvents.REQUEST, event)
+        dispatcher.dispatch(EngineEvents.REQUEST, event)
 
         if(event.getResponse()) {
             return filter(event.getResponse(), request)
         }
 
-        Callable controller = resolver.getController(request)
+        event = new EngineControllerEvent(dispatcher: dispatcher, request: request)
+
+        dispatcher.dispatch(EngineEvents.CONTROLLER, event)
+
+        def controller = event.controller
 
         if( ! controller) {
             throw new ControllerNotFoundException('Unable to find relevant controller callable')
         }
 
-        event = new KernelControllerEvent(
-                dispatcher: dispatcher,
-                controller: controller,
-                request: request
-        )
-
-        dispatcher.dispatch(KernelEvents.CONTROLLER, event)
-
-        controller = event.controller
-
-        List arguments = resolver.getArguments(request, controller)
+        List arguments = event.arguments
 
         Response response = controller(*arguments)
 
@@ -72,26 +62,26 @@ class Kernel implements KernelInterface {
 
     Response filter(Response response, Request request) {
 
-        EventInterface event = new KernelResponseEvent(
+        EventInterface event = new EngineResponseEvent(
                 dispatcher: dispatcher,
                 request: request,
                 response: response
         )
 
-        dispatcher.dispatch(KernelEvents.RESPONSE, event)
+        dispatcher.dispatch(EngineEvents.RESPONSE, event)
 
         event.getResponse()
     }
 
     Response handleException(Exception e, Request request) {
 
-        EventInterface event = new KernelExceptionEvent(
+        EventInterface event = new EngineExceptionEvent(
                 dispatcher: dispatcher,
                 request: request,
                 exception: e
         )
 
-        dispatcher.dispatch(KernelEvents.EXCEPTION, event)
+        dispatcher.dispatch(EngineEvents.EXCEPTION, event)
 
         event.getResponse()
     }

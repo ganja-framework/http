@@ -1,4 +1,4 @@
-package ganja.component.http.controller
+package ganja.component.http.listener
 
 import ganja.component.http.Request
 import ganja.component.http.Response
@@ -17,14 +17,13 @@ class ControllerResolverSpec extends Specification {
 
         expect:
         resolver instanceof ControllerResolver
-        resolver instanceof ControllerResolverInterface
     }
 
     void "it returns null if request doesn't contain 'controller' attribute"() {
 
         given:
         Logger logger = Mock()
-        ControllerResolverInterface resolver = new ControllerResolver(logger: logger)
+        ControllerResolver resolver = new ControllerResolver(logger: logger)
         Request request = Mock()
 
         when:
@@ -40,12 +39,12 @@ class ControllerResolverSpec extends Specification {
         given:
         ContainerInterface container = Mock()
         container.get(_) >> obj
-        ControllerResolverInterface resolver = new ControllerResolver(container: container)
+        ControllerResolver resolver = new ControllerResolver(container: container)
 
         when:
         Request request = Mock()
 
-        request.getAttribute('controller') >> input
+        request.getAttribute('listener') >> input
         def result = resolver.getController(request)
 
         then:

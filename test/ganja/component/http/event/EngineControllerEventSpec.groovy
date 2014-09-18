@@ -6,15 +6,15 @@ import spock.lang.Specification
 
 import java.util.concurrent.Callable
 
-class KernelControllerEventSpec extends Specification {
+class EngineControllerEventSpec extends Specification {
 
     void "it can be initialized"() {
 
         given:
-        def event = new KernelControllerEvent()
+        def event = new EngineControllerEvent()
 
         expect:
-        event instanceof KernelControllerEvent
+        event instanceof EngineControllerEvent
         event instanceof Event
     }
 
@@ -22,7 +22,7 @@ class KernelControllerEventSpec extends Specification {
 
         given:
         def request = Mock(Request)
-        def event = new KernelControllerEvent(request: request)
+        def event = new EngineControllerEvent(request: request)
 
         expect:
         event.request == request
@@ -32,7 +32,7 @@ class KernelControllerEventSpec extends Specification {
 
         given:
         def controller = Mock(Callable)
-        def event = new KernelControllerEvent(controller: controller)
+        def event = new EngineControllerEvent(controller: controller)
 
         expect:
         event.controller == controller

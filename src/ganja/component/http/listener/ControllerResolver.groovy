@@ -1,22 +1,21 @@
-package ganja.component.http.controller
+package ganja.component.http.listener
 
 import ganja.component.http.Request
 import java.util.concurrent.Callable
 import org.slf4j.Logger
 
-class ControllerResolver implements ControllerResolverInterface {
+class ControllerResolver {
 
     Logger logger
     def container
 
-    @Override
     Callable getController(Request request) {
 
-        String controller = request.getAttribute('controller')
+        String controller = request.getAttribute('listener')
 
         if( ! controller) {
 
-            logger?.warn('Unable to workout controller. Missing "controller" attribute on request object')
+            logger?.warn('Unable to workout listener. Missing "listener" attribute on request object')
 
             return null
         }
@@ -33,7 +32,6 @@ class ControllerResolver implements ControllerResolverInterface {
         }
     }
 
-    @Override
     List getArguments(Request request, Callable controller) {
         return null
     }
