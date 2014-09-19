@@ -53,9 +53,9 @@ class Engine implements EngineInterface {
             throw new ControllerNotFoundException('Unable to find relevant controller callable')
         }
 
-        List arguments = event.arguments
+//        List arguments = event.arguments
 
-        Response response = controller(*arguments)
+        Response response = controller()
 
         filter(response, request)
     }

@@ -44,7 +44,7 @@ class ControllerResolverSpec extends Specification {
         when:
         Request request = Mock()
 
-        request.getAttribute('listener') >> input
+        request.getAttribute('controller') >> input
         def result = resolver.getController(request)
 
         then:
