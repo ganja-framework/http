@@ -21,7 +21,7 @@ class ResponseSpec extends Specification {
         expect: 'Default values'
         response.getStatusCode() == 200
         response.content == null
-        response.getContentType() == null
+        response.getContentType() == 'text/html; charset=UTF-8'
 
         when: 'Set values'
         response.setContent('Hello World!')
