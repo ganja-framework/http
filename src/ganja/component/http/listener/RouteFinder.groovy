@@ -11,7 +11,9 @@ class RouteFinder {
 
         Request request = event.request
 
-        def options = matcher.match(request)
+        def options = matcher.match(request.getPath(), request.getMethod())
+
+        println options
 
         request.setAttribute('controller', options?.controller)
     }

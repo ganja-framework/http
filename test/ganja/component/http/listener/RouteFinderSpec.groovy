@@ -19,9 +19,9 @@ class RouteFinderSpec extends Specification {
 
         given:
         def matcher = GroovyMock(Object)
-        matcher._(_) >> { [ controller: 'homepage' ] }
+        matcher._(*_) >> { [ controller: 'homepage' ] }
         RouteFinder subject = new RouteFinder(matcher: matcher)
-        Request request = new Request()
+        Request request = new Request(path: '/')
         EngineRequestEvent event = new EngineRequestEvent(request: request)
 
         when:
