@@ -10,6 +10,7 @@ class Request implements AttributeTrait, ParameterTrait, ServletRequestParserTra
     Integer port
     String scheme
     String host
+    String path
 
     Map<String, String> headers = [:]
 

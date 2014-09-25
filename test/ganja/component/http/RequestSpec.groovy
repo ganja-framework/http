@@ -63,12 +63,14 @@ class RequestSpec extends Specification {
         request.setPort(80)
         request.setScheme('http')
         request.setHost('localhost')
+        request.setPath('/test/')
 
         then:
         request.getMethod() == 'POST'
         request.getPort() == 80
         request.getScheme() == 'http'
         request.getHost() == 'localhost'
+        request.getPath() == '/test/'
     }
 
     void "it can read from ServletRequest"() {

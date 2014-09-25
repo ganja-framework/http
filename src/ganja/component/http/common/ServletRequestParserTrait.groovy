@@ -12,6 +12,7 @@ trait ServletRequestParserTrait {
         scheme = servletRequest.getScheme()
         method = servletRequest.getMethod()
         host = servletRequest.getRequestURL().toString().toURL().getHost()
+        path = servletRequest.getPathInfo()
 
         servletRequest.getParameterMap().each {
             if(it.value) {
