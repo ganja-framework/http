@@ -6,6 +6,7 @@ import ganja.component.http.event.EngineRequestEvent
 class RouteFinder {
 
     def matcher
+    def logger
 
     void onRequest(EngineRequestEvent event) {
 
@@ -13,7 +14,7 @@ class RouteFinder {
 
         def options = matcher.match(request.getPath(), request.getMethod())
 
-        println options
+        logger?.debug("Found controller '${options?.controller}' for path '${request.getPath()}'")
 
         request.setAttribute('controller', options?.controller)
     }
