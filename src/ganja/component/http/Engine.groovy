@@ -81,6 +81,6 @@ class Engine implements EngineInterface {
 
         dispatcher.dispatch(EngineEvents.EXCEPTION, event)
 
-        event.getResponse()
+        filter(event.getResponse(), request)
     }
 }
