@@ -14,7 +14,6 @@ class ControllerResolver {
     void onController(EngineControllerEvent event) {
 
         event.controller = getController(event.request)
-        event.arguments = getArguments(event.request, event.controller)
     }
 
     Callable getController(Request request) {
@@ -38,10 +37,5 @@ class ControllerResolver {
             def obj = container.get(items[0])
             return obj.&"${items[1]}"
         }
-    }
-
-    List getArguments(Request request, Callable controller) {
-
-        return null
     }
 }
