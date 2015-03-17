@@ -2,8 +2,18 @@ package ganja.component.http.profiler
 
 class Profiler {
 
-    Profile collect(def request, def response, Exception exeption) {
+    ProfilerStorageInterface storage
+    List<DataCollectorInterface> collectors
 
-        return new Profile(token: '123456')
+    void collect(def request, def response, Exception exception) {
+
+        // create and save profile
+        def profile = new Profile()
+
+        collectors.each({ DataCollectorInterface collector ->
+            profile.put(collector.name, collector.collect(request, response, exception))
+        })
+
+        storage.save(profile)
     }
 }

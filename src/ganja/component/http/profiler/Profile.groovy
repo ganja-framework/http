@@ -7,4 +7,5 @@ class Profile {
     String ipAddress
     String method
 
+    @Delegate Map<String,Object> data
 }

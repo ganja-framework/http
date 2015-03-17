@@ -55,15 +55,16 @@ class Engine implements EngineInterface {
 
         Response response = controller(request)
 
-        filter(response, request)
+        filter(request, response)
     }
 
-    Response filter(Response response, Request request) {
+    Response filter(Request request, Response response = null, Exception exception = null) {
 
         EventInterface event = new EngineResponseEvent(
                 dispatcher: dispatcher,
                 request: request,
-                response: response
+                response: response,
+                exception: exception
         )
 
         dispatcher.dispatch(EngineEvents.RESPONSE, event)
@@ -81,6 +82,6 @@ class Engine implements EngineInterface {
 
         dispatcher.dispatch(EngineEvents.EXCEPTION, event)
 
-        filter(event.getResponse(), request)
+        filter(request, event.getResponse(), e)
     }
 }
