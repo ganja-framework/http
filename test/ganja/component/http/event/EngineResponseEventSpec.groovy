@@ -36,4 +36,14 @@ class EngineResponseEventSpec extends Specification {
         expect:
         event.response == response
     }
+
+    void "it can transport exception object"() {
+
+        given:
+        def exception = new RuntimeException()
+        def event = new EngineResponseEvent(exception: exception)
+
+        expect:
+        event.exception == exception
+    }
 }
