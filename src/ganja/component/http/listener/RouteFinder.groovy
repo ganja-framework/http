@@ -12,10 +12,16 @@ class RouteFinder {
 
         Request request = event.request
 
-        def options = matcher.match(request.getPath(), request.getMethod())
+        def defaults = matcher.match(request.getPath(), request.getMethod())
 
-        logger?.debug("Found controller '${options?.controller}' for path '${request.getPath()}'")
+        logger?.debug("Found controller '${defaults?.controller}' for path '${request.getPath()}'")
 
-        request.setAttribute('controller', options?.controller)
+        request.setAttribute('controller', defaults?.controller)
+
+        defaults.each({
+            if(it.key != 'controller') {
+                request.setParameter(it.key, it.value)
+            }
+        })
     }
 }

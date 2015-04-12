@@ -8,4 +8,5 @@ class EngineResponseEvent extends Event {
 
     Request request
     Response response
+    Exception exception
 }
