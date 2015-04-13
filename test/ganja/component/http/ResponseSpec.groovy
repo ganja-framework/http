@@ -1,5 +1,6 @@
 package ganja.component.http
 
+import ganja.common.http.ResponseInterface
 import spock.lang.Specification
 
 class ResponseSpec extends Specification {
@@ -11,6 +12,7 @@ class ResponseSpec extends Specification {
 
         expect:
         response instanceof Response
+        response instanceof ResponseInterface
     }
 
     void "it has some properties"() {

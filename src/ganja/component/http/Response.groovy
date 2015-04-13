@@ -1,8 +1,9 @@
 package ganja.component.http
 
+import ganja.common.http.ResponseInterface
 import ganja.component.http.common.ServletResponseWriterTrait
 
-class Response implements ServletResponseWriterTrait {
+class Response implements ResponseInterface, ServletResponseWriterTrait {
 
     String content
     Integer statusCode = 200

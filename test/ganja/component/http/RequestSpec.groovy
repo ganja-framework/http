@@ -1,5 +1,6 @@
 package ganja.component.http
 
+import ganja.common.http.RequestInterface
 import ganja.component.http.common.ServletRequestParserTrait
 import spock.lang.Specification
 
@@ -12,6 +13,7 @@ class RequestSpec extends Specification {
 
         expect:
         request instanceof Request
+        request instanceof RequestInterface
     }
 
     void "it can have attributes"() {
